@@ -29,12 +29,17 @@ namespace Астероиды
             Height = form.Height;
             form.Text = "Астероиды";
             Buffer = _context.Allocate(G, new Rectangle(0, 0, Width, Height));
+
+            #region События и управление временем.
             Timer timer = new Timer { Interval = 10 };
             _timer.Start();
             _timer.Tick += Timer_Tick;
-            form.KeyDown += Form_KeyDown;//Подключаем управление.
-            //Ship.MessageDie += Finish;
-            
+
+
+
+            form.KeyDown += Form_KeyDown;//Подключаем управление.(Подписываемся на событие.)
+                                         //Ship.MessageDie += Finish;
+            #endregion
         }
 
         private static void Form_KeyDown(object sender, KeyEventArgs e)//Ревкция на нажатие кнопок.
@@ -66,27 +71,40 @@ namespace Астероиды
 
         private static void Timer_Tick(object sender, EventArgs e)
         {
+            NewMeteor();
             Drow();
             Update();
+
+        }
+
+        public static void NewMeteor()
+        {
+            //_objs = new Meteor[1];
+            
+            for (var i = 0; i < _objs.Length; i++)
+            {
+                var r = rnd.Next(5, 50);
+                NewMeteor(r, i);
+            }
         }
 
         public static void Update()
         {   
             foreach (Meteor a in _objs)
-            {
+            {   
                 a?.Update();
                 _ship?.Update();
 
-                for (int i = 0; i < _objs.Length; i++)
-                {
+                for (var i = 0; i < _objs.Length; i++)
+                {   
                     if (_objs == null) continue;
-
+                    
                     if (_ship.Collision(_objs[i]) && (_objs[i] != null))
                     {
                         _objs[i] = null;
 
-                        int r = rnd.Next(5, 50);
-                        _objs[i] = new Meteor(new Point(Game.Width, rnd.Next(0, Game.Height)), new Point(-r / 4, 0), new Size(r, r));
+                        var r = rnd.Next(5, 50);
+                        NewMeteor(r, i);
                         continue;
                     }
                 }
@@ -99,10 +117,15 @@ namespace Астероиды
 
             _objs = new Meteor[25];
             for (var i = 0; i < _objs.Length; i++)
-            {   
-                int r = rnd.Next(5, 50);
-                _objs[i] = new Meteor(new Point(Game.Width, rnd.Next(0, Game.Height)), new Point(-r / 4, 0), new Size(r, r));
+            {
+                var r = rnd.Next(5, 50);
+                NewMeteor(r, i);
             }
+        }
+
+        public static void NewMeteor(int r,int i)
+        {  
+            _objs[i] = new Meteor(new Point(Game.Width, rnd.Next(0, Game.Height)), new Point(-r / 4, 0), new Size(r, r));
         }
     }
 

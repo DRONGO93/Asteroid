@@ -14,10 +14,6 @@ namespace Астероиды
             Size = size;
         }
 
-        public void NewMeteor()
-        { }
-
-
         public override void Drow() => Game.Buffer.Graphics.DrawImage(_Meteorit, Pos.X, Pos.Y, Size.Width, Size.Height);
         
         public override void Update()

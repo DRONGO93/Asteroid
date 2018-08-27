@@ -15,7 +15,7 @@ namespace Астероиды
             //Настройки окна.
             form.Width = 800;
             form.Height = 600;
-            form.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //form.FormBorderStyle = FormBorderStyle.FixedSingle; //Жосткая фиксация окна игры.
             Game.Init(form);
             Game.Load();
             Game.Drow();
