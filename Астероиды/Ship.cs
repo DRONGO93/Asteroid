@@ -17,17 +17,15 @@ namespace Астероиды
 
         public override void Update() { }
 
+        #region Отступы шипа по картинке (Настроено)
         public void Up()
         {if (Pos.Y > 0) Pos.Y = Pos.Y - Dir.Y;}
-
         public void Down()
-        {if (Pos.Y < Game.Height - 30) Pos.Y = Pos.Y + Dir.Y;}
-
+        {if (Pos.Y < Game.Height - 70) Pos.Y = Pos.Y + Dir.Y;}
         public void left()
         {if (Pos.X > 0) Pos.X = Pos.X - Dir.X;}
-
         public void Right()
-        {if (Pos.X < Game.Width - 50) Pos.X = Pos.X + Dir.X;}
-
+        {if (Pos.X < Game.Width - 70) Pos.X = Pos.X + Dir.X;}
+        #endregion
     }
 }
