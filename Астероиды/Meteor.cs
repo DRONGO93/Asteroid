@@ -20,19 +20,15 @@ namespace Астероиды
         {
             Pos.X = Pos.X + Dir.X/4;
             //Pos.Y = Pos.Y + Dir.Y/4;
-            if (Pos.X < 0) Dir.X = 0;
+            if (Pos.X < 0)
+            {
+                Dir.X = 0;
+                Game.Del_Meteor();
+            }
             //if (Pos.X < 0) Dir.X = -Dir.X;
             //if (Pos.X > Game.Width) Dir.X = -Dir.X;
             //if (Pos.Y < 0) Dir.Y = -Dir.Y;
             //if (Pos.Y > Game.Height) Dir.Y = -Dir.Y;
-        }
-
-        public void Del_Meteor()
-        {
-            if (Pos.X < 0) _Meteorit = null;
-            if (Pos.X > Game.Width) _Meteorit = null;
-            if (Pos.Y < 0) _Meteorit = null;
-            if (Pos.Y > Game.Height) _Meteorit = null;
         }
     }
 }

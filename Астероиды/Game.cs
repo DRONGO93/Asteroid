@@ -2,6 +2,9 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Астероиды
 {
@@ -115,6 +118,7 @@ namespace Астероиды
         {
             _ship = new Ship(new Point(10, 400), new Point(5, 5), new Size(50, 30));
 
+
             _objs = new Meteor[25];
             for (var i = 0; i < _objs.Length; i++)
             {
@@ -126,6 +130,32 @@ namespace Астероиды
         public static void NewMeteor(int r,int i)
         {  
             _objs[i] = new Meteor(new Point(Game.Width, rnd.Next(0, Game.Height)), new Point(-r / 4, 0), new Size(r, r));
+        }
+
+        public static void Del_Meteor()
+        {
+            var SelectMeteor = from t in  _objs 
+                               where  t(Point.Empty.X) = 0 //IEnumerable<BaseObject>
+                               orderby t
+                               select t;
+
+
+
+            foreach (Meteor Q in SelectMeteor)
+            {
+                
+                Q = null;
+                //if (a == Point(0))
+                //{
+                //    a = null;
+                //}
+
+                //}
+                //if (Pos.X < 0) _Meteorit = null;
+                //if (Pos.X > Game.Width) _Meteorit = null;
+                //if (Pos.Y < 0) _Meteorit = null;
+                //if (Pos.Y > Game.Height) _Meteorit = null;
+            }
         }
     }
 
